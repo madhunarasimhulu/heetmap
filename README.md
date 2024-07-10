@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# 1536-Well Microtiter Plate Data Visualization
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a React.js application that allows users to load data from a 1536-well microtiter plate and visualize the data as a heatmap.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Data Loading**: Users can upload a CSV file containing the data for the 1536-well microtiter plate.
+- **Data Visualization**: Display a heatmap representing the data. Users can select a metric to visualize and hover over individual wells to see detailed information.
 
-### `npm start`
+## Project Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Follow these instructions to set up and run the project locally.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- Node.js (v12 or higher)
+- Docker (optional, for containerized deployment)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. **Clone the repository**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install dependencies**:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    npm install
+    ```
 
-### `npm run eject`
+### Running the Application
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Start the development server**:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    ```bash
+    npm start
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    The application will be available at `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **Upload CSV File**:
 
-## Learn More
+    - Go to the Data Loading screen.
+    - Click on the "Upload CSV" button and select your CSV file.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. **Visualize Data**:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    - After uploading, navigate to the Data Visualization screen.
+    - Select a metric from the dropdown to visualize it on the heatmap.
 
-### Code Splitting
+### Running with Docker
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Build the Docker image**:
 
-### Analyzing the Bundle Size
+    ```bash
+    docker build -t microtiter-plate-visualization .
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. **Run the Docker container**:
 
-### Making a Progressive Web App
+    ```bash
+    docker run -p 3000:3000 microtiter-plate-visualization
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    The application will be available at `http://localhost:3000`.
 
-### Advanced Configuration
+### Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- `src/`
+  - `components/`
+    - `DataLoader.js`: Component for uploading the CSV file.
+    - `Heatmap.js`: Component for visualizing the heatmap.
+  - `App.js`: Main application component.
+  - `index.js`: Entry point of the application.
 
-### Deployment
+### CSV Format
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The CSV file should have the following structure:
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```csv
+Metadata_Col,Metadata_Row,Metadata_Well,Metadata_perturbation_id,Metadata_perturbation_type,QC_cell_count,QC_cell_count_cov,QC_cov_failed,QC_position_effect
+1,A,A01,pert_0000,trt,1096,-1.468469274,FALSE,0.354570637
+2,A,A02,pert_0000,trt,1555,0.828631709,FALSE,0.301939058
+...

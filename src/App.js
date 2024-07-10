@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState } from 'react';
+import CSVReader from './components/CSVReader';
+import Heatmap from './components/Heatmap';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [data, setData] = useState([]);
+  const [metric, setMetric] = useState('');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CSVReader setData={setData} />
+      {data.length > 0 && (
+        <>
+          <select onChange={(e) => setMetric(e.target.value)}>
+            {Object.keys(data[0]).map((key, index) => (
+              <option key={index} value={key}>{key}</option>
+            ))}
+          </select>
+          <Heatmap data={data} metric={metric} />
+        </>
+      )}
     </div>
   );
 }
